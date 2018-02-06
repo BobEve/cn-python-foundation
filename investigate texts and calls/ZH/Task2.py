@@ -31,32 +31,41 @@ def longest_time_num():
     以电话号码为键，通话总时长为值的一个字典
     :return:
     """
-    longest_nums = {}
+    longest_nums_dict = {}
     for call in calls:
         # 获取通话时间，转为int类型
         time = int(call[3])
-        if call[0] not in longest_nums:
+        if call[0] not in longest_nums_dict:
             # 如果去电号码不在字典中，赋值并设置通话时间
-            longest_nums[call[0]] = time
+            longest_nums_dict[call[0]] = time
         else:
             # 如果去电号码在字典中，更新通话时间
-            longest_nums[call[0]] += time
+            longest_nums_dict[call[0]] += time
 
-        if call[1] not in longest_nums:
+        if call[1] not in longest_nums_dict:
             # 如果接听号码不在字典中，赋值并设置通话时间
-            longest_nums[call[1]] = time
+            longest_nums_dict[call[1]] = time
         else:
             # 如果接听号码在字典中，更新通话时间
-            longest_nums[call[1]] += time
+            longest_nums_dict[call[1]] += time
 
-    sorted_longest_nums = zip(longest_nums.values(), longest_nums.keys())
-    # 对zip后的列表进行降序排序
-    sorted_longest_nums = sorted(sorted_longest_nums, reverse=True)
-    # 取第一个号码信息
-    longest_num_time = sorted_longest_nums[0]
+    """
+    思路参考：https://stackoverflow.com/questions/31506694/python-dict-more-than-one-max-value
+    """
+    # 获取通话时间最大值
+    longest_times = max(longest_nums_dict.values())
+    # 返回所有通话时间最大值对应的电话号码集合，处理重复value的问题
+    longest_nums = [k for k, v in longest_nums_dict.items() if v == longest_times]
 
-    return "%s spent the longest time, %d seconds, on the phone during September 2016." % (
-        longest_num_time[1], longest_num_time[0])
+    # 遍历最大通话时间对应的电话号码集合，输出最大通话时间和电话号码
+    for longest_num in longest_nums:
+        print("%s spent the longest time, %d seconds, on the phone during September 2016." % (
+            longest_num, longest_nums_dict.get(longest_num)))
+
+    # longest_num_time = max(longest_nums_dict.items(), key=lambda x: x[1])
+    # return "%s spent the longest time, %d seconds, on the phone during September 2016." % (
+    #     longest_num_time[0], longest_num_time[1])
 
 
-print(longest_time_num())
+longest_time_num()
+# print(longest_time_num())

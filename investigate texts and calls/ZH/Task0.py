@@ -30,7 +30,7 @@ def print_first_text():
 def print_first_call():
     """如果电话数据大于0，则获取第一条数据"""
     if len(calls) > 0:
-        first_calls = calls[0]
+        first_calls = calls[-1]
         print("Last record of calls, {} calls {} at time {}, lasting {} seconds".format(first_calls[0], first_calls[1],
                                                                                         first_calls[2], first_calls[3]))
 

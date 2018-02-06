@@ -76,8 +76,8 @@ def bangalore_calls():
                 # 如果主叫号码以7、8、9、140开头，获取移动前缀
                 pre_called_nums.add(called_num[:4])
 
-    print("%.2f percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore."
-          % (_total_from_bangalore_to_bangalore_num / _total_from_bangalore_num))
+    print("%.2f%% percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore."
+          % ((_total_from_bangalore_to_bangalore_num / _total_from_bangalore_num) * 100))
 
     # 将集合按题意转为列表，排序并打印
     pre_called_nums = sorted(list(pre_called_nums))
