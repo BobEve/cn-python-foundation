@@ -35,19 +35,22 @@ def longest_time_num():
     for call in calls:
         # 获取通话时间，转为int类型
         time = int(call[3])
-        if call[0] not in longest_nums_dict:
-            # 如果去电号码不在字典中，赋值并设置通话时间
-            longest_nums_dict[call[0]] = time
-        else:
-            # 如果去电号码在字典中，更新通话时间
-            longest_nums_dict[call[0]] += time
 
-        if call[1] not in longest_nums_dict:
-            # 如果接听号码不在字典中，赋值并设置通话时间
-            longest_nums_dict[call[1]] = time
+        call_num = call[0]
+        if call_num in longest_nums_dict:
+            # 如果去电号码在字典中，更新通话时间
+            longest_nums_dict[call_num] += time
         else:
+            # 如果去电号码不在字典中，赋值并设置通话时间
+            longest_nums_dict[call_num] = time
+
+        called_num = call[1]
+        if called_num in longest_nums_dict:
             # 如果接听号码在字典中，更新通话时间
-            longest_nums_dict[call[1]] += time
+            longest_nums_dict[called_num] += time
+        else:
+            # 如果接听号码不在字典中，赋值并设置通话时间
+            longest_nums_dict[called_num] = time
 
     """
     思路参考：https://stackoverflow.com/questions/31506694/python-dict-more-than-one-max-value
